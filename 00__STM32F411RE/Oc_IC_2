@@ -1,0 +1,54 @@
+//****
+// TIM3_CH2  output compare  PC7
+// TIM#_CH3  Input Capture   PB8
+
+
+#include"stm32f4xx.h"
+int timestamp = 0; int hold =1 ;
+
+int main(void)
+{
+  // configure the TIM3_Ch2 output of PC7
+	   RCC->AHB1ENR |=1;
+	   GPIOC->MODER |=0xC000;
+	   GPIOC->MODER |=0x8000;
+	   GPIOC->AFR[0] &=~0xF0000000;
+	   GPIOC->AFR[0] |=0x20000000;
+
+
+    //configure the TIM3 warp around at 1 hz and toggle CH2 when o/p value is 0.
+	    RCC->AHB1ENR |= 1;
+	    TIM3->PSC = 1600-1;
+	    TIM3->ARR = 10000-1;
+	    TIM3->CCMR1 =0x3000;
+	    TIM3->CCR1 = 0;
+	    TIM3->CCER  |= 1;
+	    TIM3->CNT  =0;
+	    TIM3->CR1 =1;
+
+
+	 // configure the PB8 as a input of TIM4_CH3 to
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
