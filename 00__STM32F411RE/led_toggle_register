@@ -1,0 +1,22 @@
+#include"stm32f4xx.h"
+void delay(int T)
+{
+int i;
+  while(T--){
+for(i=0;i<3000;i++);
+  }
+
+}
+int main()
+{
+
+RCC->AHB1ENR |=1;
+GPIOA->MODER |= 0X400;
+while(1)
+{
+GPIOA->BSRR|=0x20;
+delay(1000);
+GPIOA->BSRR|=0X200000;
+delay(1000);
+}
+}
